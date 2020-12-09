@@ -1,0 +1,52 @@
+.registerLink{
+    text-decoration: none;
+    color: white;
+    background-color: rgb(26, 71, 0);
+    padding: 10px;
+    border-radius: 10px;
+}
+.loginLink{
+    text-decoration: none;
+    color: white;
+    background-color: rgb(26, 71, 0);
+    padding: 10px;
+    border-radius: 10px;
+    position: absolute;
+    top: 800px;
+}
+
+.usernameInput{
+    height: 20px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    margin-right: 5px;
+    border: none;
+    border-radius: 6px;
+    
+}
+
+.password{
+    height: 20px;
+    border: none;
+    margin-left: 5px;
+    border-radius: 6px;
+}
+
+
+@media(max-width: 375px){
+    .loginBox{
+        width: 100%;
+        margin: 0;
+        background-color: rgb(0,0,0,0);
+    }
+    .postContainer{
+        height: 500px;
+        display: flex;
+        align-items: center;
+    }
+    .registerLink{
+        position: absolute;
+        left: 40px;
+        top: 50%;
+    }
+}

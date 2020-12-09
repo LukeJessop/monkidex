@@ -1,0 +1,48 @@
+.create{
+  width: 75px;
+  height: 75px;
+  margin: 0;
+
+  background-color: rgb(105, 105, 105);
+  border-radius: 50%;
+  font-size: 40px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.25);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  right: 250px;
+  bottom: 20px;
+}
+
+.create:hover{
+  cursor: pointer;
+  
+  background-color:grey;
+  bottom: 21px;
+}
+.descriptionbox{
+  margin: auto;
+}
+.profilecontainer{
+  display: flex;
+  height: 350px;
+  border-bottom: 1px solid black;
+}
+.username{
+  font-size: 40px;
+  position: absolute;
+  top: 290px;
+  margin-left: 190px;
+}
+.banner{
+  width: 100%;
+  height: 200px;
+}
+.profile{
+  width: 150px;
+  border-radius: 50%;
+  position: absolute;
+  top: 230px;
+}
