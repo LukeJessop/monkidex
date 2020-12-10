@@ -39,7 +39,7 @@ class Post extends Component {
         const {description, img, author} = this.state
         if(this.props.username === author){
             return(
-            <div className="container postContainer">
+            <div className="container">
                 <div className="postContainer">
                     <div className="imgContainerPost">
                         <img className='idivImgPost' src={img}/>

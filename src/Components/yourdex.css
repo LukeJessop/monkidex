@@ -46,3 +46,19 @@
   position: absolute;
   top: 230px;
 }
+
+.newPostContainer{
+  background-color: rgb(25, 75, 0);
+  margin: auto;
+  text-align: center;
+  position: relative;
+}
+.inputAreas{
+  display: flex;
+}
+
+@media(max-width: 375px){
+  .create{
+    right: 10px;
+  }
+}

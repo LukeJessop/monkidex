@@ -11,8 +11,8 @@
     background-color: rgb(26, 71, 0);
     padding: 10px;
     border-radius: 10px;
-    position: absolute;
-    top: 800px;
+    position: relative;
+    top: 20px;
 }
 
 .usernameInput{

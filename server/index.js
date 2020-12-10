@@ -1,11 +1,11 @@
 require ('dotenv').config();
-
+const aws = require('aws-sdk')
 const express = require('express')
 const massive = require('massive')
 const session = require('express-session')
 const ctrl = require('./controller')
 
-const {SESSION_SECRET, SERVER_PORT, CONNECTION_STRING} = process.env;
+const {SESSION_SECRET, SERVER_PORT, CONNECTION_STRING, S3_BUCKET, AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY} = process.env;
 
 const app = express()
 
@@ -28,19 +28,50 @@ massive({
     console.log('Database up!')
 }).catch(err => console.log(err))
 
-///
+//
 app.post('/auth/register', ctrl.register)
 app.post('/auth/login', ctrl.login)
-///
-app.post('/api/post', ctrl.newPost) //creates post :)
+//
 
+app.get('/api/signs3', (req, res) => {
+  aws.config = {
+    region: 'us-west-1',
+    accessKeyId: AWS_ACCESS_KEY_ID,
+    secretAccessKey: AWS_SECRET_ACCESS_KEY,
+  };
+
+  const s3 = new aws.S3();
+  const fileName = req.query['file-name'];
+  const fileType = req.query['file-type'];
+  const s3Params = {
+    Bucket: S3_BUCKET,
+    Key: fileName,
+    Expires: 60,
+    ContentType: fileType,
+    ACL: 'public-read',
+  };
+
+  s3.getSignedUrl('putObject', s3Params, (err, data) => {
+    if (err) {
+      console.log(err);
+      return res.end();
+    }
+    const returnData = {
+      signedRequest: data,
+      url: `https://${S3_BUCKET}.s3.amazonaws.com/${fileName}`,
+    };
+
+    return res.send(returnData);
+  });
+});
+
+//
+app.post('/api/post', ctrl.newPost) //creates post :)
 app.get('/api/post', ctrl.getPosts) //for all posts :)
 app.get('/api/yourposts', ctrl.getUserPosts) //for all user posts :)
 app.get('/api/post/:id', ctrl.getIndivPosts) //for individual posts :)
-
-app.put('/api/post/:id', ctrl.editPost) //edits post :[]
-
+app.put('/api/post/:id', ctrl.editPost) //edits post :)
 app.delete('/api/post/:id', ctrl.deletePost) //deletes post :)
-///
+//
 
 app.listen(SERVER_PORT, console.log(`You are on Port: ${SERVER_PORT} `))
