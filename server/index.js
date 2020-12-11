@@ -9,6 +9,7 @@ const {SESSION_SECRET, SERVER_PORT, CONNECTION_STRING, S3_BUCKET, AWS_ACCESS_KEY
 
 const app = express()
 
+app.use(express.static(`${__dirname}/../build`))
 app.use(express.json())
 
 app.use(session({
@@ -75,5 +76,10 @@ app.put('/api/post/:id', ctrl.editPost) //edits post :)
 app.put('/api/pfp', ctrl.editPfp)
 app.delete('/api/post/:id', ctrl.deletePost) //deletes post :)
 //
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../build/index.html'))
+})
+
 
 app.listen(SERVER_PORT, console.log(`You are on Port: ${SERVER_PORT} `))
