@@ -47,7 +47,6 @@ class Yourdex extends Component {
     
     getProfilePictures(){
       Axios.get('/api/pfp').then(res => {
-        console.log(res.data)
         this.setState({pfp: res.data[0].profile_picture, banner: res.data[0].profile_banner})
       })
     }

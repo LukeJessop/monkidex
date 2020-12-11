@@ -17,7 +17,6 @@ class Dashboard extends Component {
     getPosts(){
         Axios.get('/api/post').then(res => {
             this.setState({allPosts: res.data})
-            console.log(this.state.allPosts)
         })
     }
 

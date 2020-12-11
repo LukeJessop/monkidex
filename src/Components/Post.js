@@ -15,7 +15,6 @@ class Post extends Component {
     }
 
     componentDidMount() {
-        console.log(this.props)
         axios.get(`/api/post/${this.props.match.params.id}`)
           .then(res => {
               const {description, img_link, username, profile_picture} = res.data
@@ -32,7 +31,6 @@ class Post extends Component {
         .then(() => this.props.history.push(`/dashboard`))
     }
     deletePost(){
-        console.log(this.props.match.params.id)
         axios.delete(`/api/post/${this.props.match.params.id}`)
         .then(() => this.props.history.push('/yourdex'))
     }
