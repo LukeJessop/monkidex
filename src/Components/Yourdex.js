@@ -10,17 +10,21 @@ class Yourdex extends Component {
         super(props)
         this.state = {
             newPost: true,
+            isUploading: false,
+            editPfp: true,
             yourPosts: [],
             description: '',
             img: '',
-            isUploading: false
+            pfp: '',
+            banner: '',
         }
         this.post = this.post.bind(this)
-        
+        this.editPfp = this.editPfp.bind(this)
     }
 
     componentDidMount(){
         this.getYourPosts()
+        this.getProfilePictures()
     }
 
     post(){
@@ -28,6 +32,7 @@ class Yourdex extends Component {
             if(this.state.newPost === false){
                 this.setState({newPost: true})
             }
+            window.location.reload();
         })
     }
 
@@ -40,7 +45,21 @@ class Yourdex extends Component {
         })
     }
     
-    getSignedRequest([file]) {
+    getProfilePictures(){
+      Axios.get('/api/pfp').then(res => {
+        console.log(res.data)
+        this.setState({pfp: res.data[0].profile_picture, banner: res.data[0].profile_banner})
+      })
+    }
+
+    editPfp(){
+      Axios.put(`/api/pfp`, this.state).then(res => {
+        console.log(res.data)
+        window.location.reload();
+      })
+    }
+
+    getSignedRequestPost([file]) {
         this.setState({ isUploading: true });
         // We are creating a file name that consists of a random string, and the name of the file that was just uploaded with the spaces removed and hyphens inserted instead. This is done using the .replace function with a specific regular expression. This will ensure that each file uploaded has a unique name which will prevent files from overwriting other files due to duplicate names.
         const fileName = `${randomString()}-${file.name.replace(/\s/g, '-')}`;
@@ -55,14 +74,14 @@ class Yourdex extends Component {
           })
           .then(response => {
             const { signedRequest, url } = response.data;
-            this.uploadFile(file, signedRequest, url);
+            this.uploadFilePost(file, signedRequest, url);
           })
           .catch(err => {
             console.log(err);
           });
-      };
+    };
     
-      uploadFile = (file, signedRequest, url) => {
+    uploadFilePost = (file, signedRequest, url) => {
         const options = {
           headers: {
             'Content-Type': file.type,
@@ -89,7 +108,109 @@ class Yourdex extends Component {
               alert(`ERROR: ${err.status}\n ${err.stack}`);
             }
           });
-      };
+    };
+
+    getSignedRequestPfp([file]) {
+        this.setState({ isUploading: true });
+        // We are creating a file name that consists of a random string, and the name of the file that was just uploaded with the spaces removed and hyphens inserted instead. This is done using the .replace function with a specific regular expression. This will ensure that each file uploaded has a unique name which will prevent files from overwriting other files due to duplicate names.
+        const fileName = `${randomString()}-${file.name.replace(/\s/g, '-')}`;
+    
+        // We will now send a request to our server to get a "signed url" from Amazon. We are essentially letting AWS know that we are going to upload a file soon. We are only sending the file-name and file-type as strings. We are not sending the file itself at this point.
+        Axios
+          .get('/api/signs3', {
+            params: {
+              'file-name': fileName,
+              'file-type': file.type,
+            },
+          })
+          .then(response => {
+            const { signedRequest, url } = response.data;
+            this.uploadFilePfp(file, signedRequest, url);
+          })
+          .catch(err => {
+            console.log(err);
+          });
+    };
+    
+    uploadFilePfp = (file, signedRequest, url) => {
+        const options = {
+          headers: {
+            'Content-Type': file.type,
+          },
+        };
+    
+        Axios
+          .put(signedRequest, file, options)
+          .then(response => {
+            this.setState({ isUploading: false, pfp: url });
+            // THEN DO SOMETHING WITH THE URL. SEND TO DB USING POST REQUEST OR SOMETHING
+          })
+          .catch(err => {
+            this.setState({
+              isUploading: false,
+            });
+            if (err.response.status === 403) {
+              alert(
+                `Your request for a signed URL failed with a status 403. Double check the CORS configuration and bucket policy in the README. You also will want to double check your AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY in your .env and ensure that they are the same as the ones that you created in the IAM dashboard. You may need to generate new keys\n${
+                  err.stack
+                }`
+              );
+            } else {
+              alert(`ERROR: ${err.status}\n ${err.stack}`);
+            }
+          });
+    };
+
+    getSignedRequestBanner([file]) {
+        this.setState({ isUploading: true });
+        // We are creating a file name that consists of a random string, and the name of the file that was just uploaded with the spaces removed and hyphens inserted instead. This is done using the .replace function with a specific regular expression. This will ensure that each file uploaded has a unique name which will prevent files from overwriting other files due to duplicate names.
+        const fileName = `${randomString()}-${file.name.replace(/\s/g, '-')}`;
+    
+        // We will now send a request to our server to get a "signed url" from Amazon. We are essentially letting AWS know that we are going to upload a file soon. We are only sending the file-name and file-type as strings. We are not sending the file itself at this point.
+        Axios
+          .get('/api/signs3', {
+            params: {
+              'file-name': fileName,
+              'file-type': file.type,
+            },
+          })
+          .then(response => {
+            const { signedRequest, url } = response.data;
+            this.uploadFileBanner(file, signedRequest, url);
+          })
+          .catch(err => {
+            console.log(err);
+          });
+    };
+    
+    uploadFileBanner = (file, signedRequest, url) => {
+        const options = {
+          headers: {
+            'Content-Type': file.type,
+          },
+        };
+    
+        Axios
+          .put(signedRequest, file, options)
+          .then(response => {
+            this.setState({ isUploading: false, banner: url });
+            // THEN DO SOMETHING WITH THE URL. SEND TO DB USING POST REQUEST OR SOMETHING
+          })
+          .catch(err => {
+            this.setState({
+              isUploading: false,
+            });
+            if (err.response.status === 403) {
+              alert(
+                `Your request for a signed URL failed with a status 403. Double check the CORS configuration and bucket policy in the README. You also will want to double check your AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY in your .env and ensure that they are the same as the ones that you created in the IAM dashboard. You may need to generate new keys\n${
+                  err.stack
+                }`
+              );
+            } else {
+              alert(`ERROR: ${err.status}\n ${err.stack}`);
+            }
+          });
+    };
 
     render(){
         if(!this.state.newPost){
@@ -98,13 +219,13 @@ class Yourdex extends Component {
                   <div className="newPostContainer">
                     <h3>New Monkey</h3>
                     <div className="inputAreas">
-                      <input placeholder="About this monkey!" className="descriptionbox" onChange={(e) => {this.setState({description: e.target.value})}}></input>
-                      <br/>
-                      <input type='file' accept='image/png, image/jpeg, image/gif' placeholder="Img link here!" onChange={(e) => {this.getSignedRequest(e.target.files)}}></input>
-                      <br/>
                       <div>
                           <img className="newPostPic" src={this.state.img}/>
                       </div>
+                      <input type='file' accept='image/png, image/jpeg, image/gif' placeholder="Img link here!" onChange={(e) => {this.getSignedRequestPost(e.target.files)}}></input>
+                      <br/>
+                      <textarea className='descriptionbox' placeholder="About this monkey!"onChange={(e) => {this.setState({description: e.target.value})}}></textarea>
+                      <br/>
                       <button onClick={this.post}>Post</button>
                     </div>
                   </div>
@@ -130,14 +251,20 @@ class Yourdex extends Component {
         return(
             <div>
                 <div className="create" onClick={() => {
-                    if(this.state.newPost === true){this.setState({newPost: false})}else{this.setState({newPost: true})}
+                  if(this.state.newPost === true){this.setState({newPost: false})}else{this.setState({newPost: true})}
                 }}><span>+</span></div>
                 
                 <div className="container">
                     <div className="profilecontainer">
-                        <img className='banner' src='https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'/>
-                        <img className='profile'src='https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'/>
+                        <img className='banner' src={this.state.banner}/>
+                        <img className='profile'src={this.state.pfp}/>
                         <div className='username'>{this.props.username}</div>
+                        <button className="editpfp" >Edit Profile Picture</button>
+                        <div className='pfpSettings'>
+                          <input className="addPfp" type="file" onChange={(e) => {this.getSignedRequestPfp(e.target.files)}}></input>
+                          <input className="addBanner" type="file" onChange={(e) => {this.getSignedRequestBanner(e.target.files)}}></input>
+                          <button onClick={this.editPfp}>Submit</button>
+                        </div>
                     </div>
                     <div>{mappedPosts}</div>
                 </div>

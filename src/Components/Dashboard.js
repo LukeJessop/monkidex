@@ -6,7 +6,8 @@ class Dashboard extends Component {
     constructor(){
         super()
         this.state = {
-            allPosts: []
+            allPosts: [],
+            userPics: ''
         }
         this.getPosts = this.getPosts.bind(this)
     }
@@ -16,9 +17,10 @@ class Dashboard extends Component {
     getPosts(){
         Axios.get('/api/post').then(res => {
             this.setState({allPosts: res.data})
-
+            console.log(this.state.allPosts)
         })
     }
+
     render(){
         let mappedPosts = this.state.allPosts.map((element) => {
             return(
@@ -26,7 +28,7 @@ class Dashboard extends Component {
                     <div className="post" >
                         <div className="informationContainer">
                             <div className="profileContainer">
-                                <img className='profilePicture' src='https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'/>
+                                <img className='profilePicture' src={element.profile_picture}/>
                             </div>
                             <div className="items">
                                 <h3>{element.username}</h3>

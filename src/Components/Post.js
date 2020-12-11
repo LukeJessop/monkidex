@@ -18,11 +18,12 @@ class Post extends Component {
         console.log(this.props)
         axios.get(`/api/post/${this.props.match.params.id}`)
           .then(res => {
-              const {description, img_link, username} = res.data
+              const {description, img_link, username, profile_picture} = res.data
             this.setState({
                 description: description,
                 img: img_link,
                 author: username,
+                authorImg: profile_picture
             })
         })
     }
@@ -46,10 +47,12 @@ class Post extends Component {
                     </div>
 
                     <div>
-                        <img className='profilePicture' src='https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'/><h1>{author}</h1>
+                        <img className='profilePicture' src={this.state.authorImg}/>
+                        <h1>{author}</h1>
                     </div>
 
                     <div className='postDescription'>{description}</div>
+                    
                     <div className='settings'>
                         <input className="editPost" type='checkbox'></input>
                         <div className="editDropdown">

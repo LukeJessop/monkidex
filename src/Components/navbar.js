@@ -11,9 +11,9 @@ function Navbar(){
             <div className='spacer'></div>
             <div className='buttons'>
                 <Link className='button' to='/dashboard'><span>Feed</span></Link>
-                <Link className='button' to='/map'><span>Map</span></Link>
+                {/* <Link className='button' to='/map'><span>Map</span></Link> */}
                 <Link className='button' to='/yourdex'><span>Profile</span></Link>
-                <Link className='button' to='/' ><span>Logout</span></Link>
+                <Link className='button' to='/'><span>Logout</span></Link>
             </div>
         </div>
         )

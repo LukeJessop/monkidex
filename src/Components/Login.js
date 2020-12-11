@@ -17,7 +17,7 @@ class Login extends Component {
     login(){
         Axios.post('/auth/login', this.state).then(res => {
             this.props.updateUser(res.data);
-            this.props.history.push('/dashboard')
+            this.props.history.push('/yourdex')
         })
     }
 

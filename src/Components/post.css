@@ -18,7 +18,7 @@
     bottom: 200px;
 }
 .newPostPic{
-    width: 100%;
+    max-width: 600px;
 }
 .editInput{
     height: 78px;

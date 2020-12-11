@@ -67,10 +67,12 @@ app.get('/api/signs3', (req, res) => {
 
 //
 app.post('/api/post', ctrl.newPost) //creates post :)
+app.get('/api/pfp', ctrl.getPfp) //gets user profile picture
 app.get('/api/post', ctrl.getPosts) //for all posts :)
 app.get('/api/yourposts', ctrl.getUserPosts) //for all user posts :)
 app.get('/api/post/:id', ctrl.getIndivPosts) //for individual posts :)
 app.put('/api/post/:id', ctrl.editPost) //edits post :)
+app.put('/api/pfp', ctrl.editPfp)
 app.delete('/api/post/:id', ctrl.deletePost) //deletes post :)
 //
 

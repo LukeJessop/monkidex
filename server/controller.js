@@ -68,6 +68,17 @@ module.exports = {
             console.log(err)
         }
     },
+    getPfp: (req, res) => {
+        const db = req.app.get('db')
+        const userId = req.session.user.userId
+        db.get_user_pfp(userId).then((pfp) => res.status(200).send(pfp)).catch(err => console.log(err))
+    },
+    editPfp: (req, res)=>{
+        const db = req.app.get('db')
+        const userId = req.session.user.userId
+        const {banner, pfp} = req.body
+        db.edit_pfp(userId, pfp, banner).then((pfp) => res.status(200).send(pfp))
+    },
     editPost: (req, res) => {
         const db = req.app.get('db')
         const {id} = req.params

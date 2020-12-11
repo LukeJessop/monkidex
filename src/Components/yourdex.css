@@ -22,8 +22,30 @@
   background-color:grey;
   bottom: 21px;
 }
+
+.editpfp{
+  display: none;
+  height: 50px;
+  position: relative;
+  top: 170px;
+  right: 40px;
+}
+
+.profilecontainer:hover > .editpfp{
+  display: flex;
+}
+
 .descriptionbox{
-  margin: auto;
+  height: 78px;
+  width: 850px;
+  resize: none;
+  
+  border: 2px solid rgb(0, 59, 0);
+  border-radius: 10px;
+  background-color: rgb(255, 255, 255);
+  color: white;
+  font-family: 'Helvetica', sans-serif ;
+  font-size: 16px;
 }
 .profilecontainer{
   display: flex;
@@ -35,6 +57,7 @@
   position: absolute;
   top: 290px;
   margin-left: 190px;
+  color: white;
 }
 .banner{
   width: 100%;
@@ -49,12 +72,16 @@
 
 .newPostContainer{
   background-color: rgb(25, 75, 0);
+  display: flex;
   margin: auto;
+  min-height: 400px;
   text-align: center;
   position: relative;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 .inputAreas{
-  display: flex;
 }
 
 @media(max-width: 375px){
