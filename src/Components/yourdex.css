@@ -31,10 +31,6 @@
   right: 40px;
 }
 
-.profilecontainer:hover > .editpfp{
-  display: flex;
-}
-
 .descriptionbox{
   height: 78px;
   width: 850px;
@@ -61,13 +57,44 @@
 }
 .banner{
   width: 100%;
-  height: 200px;
+  min-height: 200px;
+  max-height: 200px;
+  background-color: grey;
 }
 .profile{
   width: 150px;
+  height: 150px;
   border-radius: 50%;
   position: absolute;
   top: 230px;
+  background-color: rgb(197, 197, 197);
+}
+
+.pfpSettings{
+  position: absolute;
+  top: 376px;
+}
+
+.addPfp{
+  color: white;
+}
+
+.addBanner{
+  color: white;
+}
+
+.wwaa{
+  color: white;
+  padding: 0;
+  margin: 0;
+}
+
+.descriptionbox{
+  color: black;
+}
+
+.inputBox{
+  color: white;
 }
 
 .newPostContainer{

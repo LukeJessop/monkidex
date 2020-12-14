@@ -221,7 +221,9 @@ class Yourdex extends Component {
                       <div>
                           <img className="newPostPic" src={this.state.img}/>
                       </div>
-                      <input type='file' accept='image/png, image/jpeg, image/gif' placeholder="Img link here!" onChange={(e) => {this.getSignedRequestPost(e.target.files)}}></input>
+                      <div className="inputBox">
+                        <input type='file' accept='image/png, image/jpeg, image/gif' onChange={(e) => {this.getSignedRequestPost(e.target.files)}}></input>
+                      </div>
                       <br/>
                       <textarea className='descriptionbox' placeholder="About this monkey!"onChange={(e) => {this.setState({description: e.target.value})}}></textarea>
                       <br/>
@@ -258,8 +260,8 @@ class Yourdex extends Component {
                         <img className='banner' src={this.state.banner}/>
                         <img className='profile'src={this.state.pfp}/>
                         <div className='username'>{this.props.username}</div>
-                        <button className="editpfp" >Edit Profile Picture</button>
                         <div className='pfpSettings'>
+                          <h4 className='wwaa'>Change your profile pictures!</h4>
                           <input className="addPfp" type="file" onChange={(e) => {this.getSignedRequestPfp(e.target.files)}}></input>
                           <input className="addBanner" type="file" onChange={(e) => {this.getSignedRequestBanner(e.target.files)}}></input>
                           <button onClick={this.editPfp}>Submit</button>
