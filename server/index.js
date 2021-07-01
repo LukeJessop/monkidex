@@ -4,12 +4,13 @@ const express = require('express')
 const massive = require('massive')
 const session = require('express-session')
 const ctrl = require('./controller')
+const path = require('path')
 
 const {SESSION_SECRET, SERVER_PORT, CONNECTION_STRING, S3_BUCKET, AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY} = process.env;
 
 const app = express()
 
-app.use(express.static(`${__dirname}/../build`))
+app.use(express.static(`${__dirname} + /../build`))
 app.use(express.json())
 
 app.use(session({
