@@ -5,13 +5,15 @@ const massive = require('massive')
 const session = require('express-session')
 const ctrl = require('./controller')
 const path = require('path')
+const cors = require('cors')
+
 
 const {SESSION_SECRET, SERVER_PORT, CONNECTION_STRING, S3_BUCKET, AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY} = process.env;
 
 const app = express()
 
 
-
+app.use(cors())
 app.use(express.static(`${__dirname} + /../build`))
 app.use(express.json())
 
@@ -68,7 +70,6 @@ app.get('/api/signs3', (req, res) => {
     return res.send(returnData);
   });
 });
-
 //
 app.post('/api/post', ctrl.newPost) //creates post :)
 app.get('/api/pfp', ctrl.getPfp) //gets user profile picture
