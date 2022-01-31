@@ -1,0 +1,104 @@
+.dashboardContainer{
+    height: auto;
+    min-width: 889px;
+    min-height: 847px;
+    width: 65%;
+    background-color: rgb(7, 47, 0);
+    margin: 0 auto;
+}
+.post-container{
+  display: flex;
+  border-bottom: #115400 solid 1px;
+}
+
+.post-container:hover{
+    background-color: #462200;
+}
+.post:hover{
+  background-color: #582b00;
+
+}
+
+.informationContainer{
+    display: flex;
+    width: 100%;
+}
+
+.items{
+
+}
+
+.imgContainer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    width: 100%;
+    min-width: 650px;
+    height: 450px;
+    right: 250px;
+    margin-top: 25px;
+    margin: auto;
+    
+}
+
+.imgPost {
+    max-width:600px;
+    min-width:600px;
+    max-height:400px;
+    min-height:300px;
+}
+
+.profileContainer{
+    display: flex;
+    flex-direction: column;
+}
+
+.userInfo{
+    display: flex;
+    margin: 10px;
+}
+
+.interaction-buttons-container{
+
+}
+.like-button{
+
+}
+.comment-button{
+
+}
+
+h3 { /* username of poster */
+  margin-left: 10px;
+  color: white;
+}
+
+.profilePicture{
+    background-color: white;
+    margin: 5px;
+    min-width: 50px;
+    min-height: 50px;
+    max-width: 50px;
+    max-height: 50px;
+    border-radius: 50%;
+    border-color: 1px solid white;
+}
+a{
+  text-decoration: none;
+}
+
+
+.descriptionContainer{
+  margin: 10px;
+}
+
+.description{
+  color: white;
+  margin: auto;
+  font-size: 16px;
+}
+
+
+
+

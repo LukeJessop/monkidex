@@ -1,6 +1,7 @@
 import { Component } from "react";
 import axios from 'axios'
 import {connect} from 'react-redux'
+import './post.css'
 class Post extends Component {
     constructor(props){
         super(props)
@@ -66,14 +67,19 @@ class Post extends Component {
         }
         return(
             <div className="container">
-                <div className="postContainer">
-                    <div className="imgContainerPost">
-                        <img className='idivImgPost' src={img}/>
-                    </div>
-                    <div>
-                        <img className='profilePicture' src='https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'/><h1>{author}</h1>
+                <div className="individual-post-container">
+                    <div className="info-container">
+                        <div className="user-info-container">
+                            <img className='profilePicture' src='https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'/>
+                            <h3>{author}</h3>
+                        </div>
                         {description}
                     </div>
+
+                    <div className="img-container">
+                        <img className="post-img" src={img}/>
+                    </div>
+                    <div>THIS IS WEHRE THE COMMENTS ARE GOING TO GO!</div>
                 </div>
             </div>
         )

@@ -1,0 +1,28 @@
+.individual-post-container{
+    color: white;
+    display: flex;
+    flex-direction: column;
+}
+
+.info-container{
+    width: 800px;
+    margin: auto;
+    margin-bottom: 20px;
+    padding-left: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.user-info-container{
+    display: flex;
+}
+
+
+.img-container{
+    display: flex;
+    justify-content: center;
+}
+
+.post-img{
+    width: 800px;
+}

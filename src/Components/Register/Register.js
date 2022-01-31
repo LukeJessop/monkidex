@@ -1,7 +1,8 @@
 import axios from "axios";
 import { Component } from "react";
 import {Link, withRouter} from 'react-router-dom';
-import {updateUser} from './../redux/reducer'
+import {updateUser} from './../../redux/reducer'
+import './../Login/login.css'
 
 class Register extends Component {
     constructor(){

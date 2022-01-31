@@ -1,33 +1,39 @@
 .navbar{
     text-align: center;
-    background-color:#823E00;
-    height: 80px;
+    background-color:#683200;
+    height: 60px;
     min-width: 899px;
     margin: 0;
     display: flex;
     position: sticky; top: 0px;
     z-index: 1;
+    align-items: center;
   }
-  
+.logo-button{
+  display: flex;
+}
+.logo{
+  height: 50px;
+  margin-left: 100px;
+  background-color: #FFD600;
+  border-radius: 50%;
+}
 .monkidex{
   width: 340px;
-  height: 80px;
+  height: 50px;
   margin: 0;
-  margin-left: 40px;
-  
-  font-family: Spartan;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 36px;
+  margin-left: 10px;
   
   display: flex;
   align-items: center;
-  text-align: center;
-  letter-spacing: 0.45em;
-  justify-content: center;
   
-  color: #FFD600;
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: 36px;
+  letter-spacing: 0.20em;
   text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  color: #FFD600;
+  
+  
   }
 
   .spacer{
@@ -37,25 +43,36 @@
   .buttons{
     display: flex;
     justify-content: right;
-    height: 80px;
+    height: 50px;
     align-items: center;
   }
   
   .button{
     width: 130px;
-    height: 49px;
+    height: 40px;
     left: 1181px;
     top: 15px;
     margin-right: 5px;
-  
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
     background: #FF9900;
-    border-radius: 15px;
     
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     font-style: normal;
     font-weight: normal;
-    font-size: 30px;
+    font-size: 24px;
     color: black;
+  }
+
+  .button:hover{
+    background-color: #ffb23e;
+  }
+  
+  .button:active{
+    background-color: #FF9900;
   }
 
 

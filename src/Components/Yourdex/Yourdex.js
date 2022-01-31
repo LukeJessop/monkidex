@@ -1,14 +1,14 @@
 import Axios from "axios";
 import { Component } from "react";
-import Dropzone from "react-dropzone";
 import {v4 as randomString} from 'uuid'
-import {GridLoader} from "react-spinners"
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
+import './yourdex.css'
 class Yourdex extends Component {
     constructor(props){
         super(props)
         this.state = {
+            editProfile: false,
             newPost: true,
             isUploading: false,
             editPfp: true,
@@ -37,9 +37,7 @@ class Yourdex extends Component {
     }
 
     getYourPosts(){
-        console.log("hello")
         Axios.get('/api/yourposts').then(res => {
-            console.log("hello", res.data)
             this.setState({yourPosts: res.data})
 
         })
@@ -53,7 +51,6 @@ class Yourdex extends Component {
 
     editPfp(){
       Axios.put(`/api/pfp`, this.state).then(res => {
-        console.log(res.data)
         window.location.reload();
       })
     }
@@ -212,60 +209,63 @@ class Yourdex extends Component {
     };
 
     render(){
-        if(!this.state.newPost){
-            return(
-                <div className="container postContainer">
-                  <div className="newPostContainer">
-                    <h3>New Monkey</h3>
-                    <div className="inputAreas">
-                      <div>
-                          <img className="newPostPic" src={this.state.img}/>
-                      </div>
-                      <div className="inputBox">
-                        <input type='file' accept='image/png, image/jpeg, image/gif' onChange={(e) => {this.getSignedRequestPost(e.target.files)}}></input>
-                      </div>
-                      <br/>
-                      <textarea className='descriptionbox' placeholder="About this monkey!"onChange={(e) => {this.setState({description: e.target.value})}}></textarea>
-                      <br/>
-                      <button onClick={this.post}>Post</button>
-                    </div>
-                  </div>
-                </div>
-            )
-        }
         let mappedPosts = this.state.yourPosts.map((element) => {
             return(
-                <Link to={`/post/${element.post_id}`} key={element.post_id}>
-                    <div className="post" >
-                        <div className="informationContainer">
-                            <img/>
-                            <h3>{element.username}</h3>
-                            <div className="description">{element.description}</div>
-                            <div className="imgContainer">
-                                <img className='imgPost' src={element.img_link}/>
-                            </div>
-                        </div>
-                    </div>
-                </Link>
+              <Link to={`/post/${element.post_id}`} key={element.post_id}>
+              <div className="post">
+                  <div className="informationContainer">
+                      <div className="items">
+                          <div className="imgContainer">
+                              <img className="imgPost" src={element.img_link}/>
+                          </div>
+                      </div>
+                      <div className="profileContainer">
+                          <div className="userInfo">
+                              <img className='profilePicture' src={element.profile_picture}/>
+                              <h3>{element.username}</h3>
+                          </div>
+                          <div className="descriptionContainer">
+                              <div className="description">{element.description}</div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </Link>
             )
         })
         return(
             <div>
-                <div className="create" onClick={() => {
-                  if(this.state.newPost === true){this.setState({newPost: false})}else{this.setState({newPost: true})}
-                }}><span>+</span></div>
-                
                 <div className="container">
                     <div className="profilecontainer">
+                      <div className="bannerContainer">
                         <img className='banner' src={this.state.banner}/>
+                      </div>
+                      <div className="profileInfoContainer">
                         <img className='profile'src={this.state.pfp}/>
-                        <div className='username'>{this.props.username}</div>
-                        <div className='pfpSettings'>
-                          <h4 className='wwaa'>Change your profile pictures!</h4>
-                          <input className="addPfp" type="file" onChange={(e) => {this.getSignedRequestPfp(e.target.files)}}></input>
-                          <input className="addBanner" type="file" onChange={(e) => {this.getSignedRequestBanner(e.target.files)}}></input>
-                          <button onClick={this.editPfp}>Submit</button>
+                        <h3 className='username'>{this.props.username}</h3>
+                      </div>
+                      <div className="profile-buttons">
+                        <button className="editPfpButton">Edit Pictures</button>
+                        <div className="create" onClick={() => {
+                          if(this.state.newPost === true){this.setState({newPost: false})}else{this.setState({newPost: true})}
+                        }}>
+                          <img className="create-post-button" src="https://monkidex-bucket.s3.amazonaws.com/490a7ddc-b302-4f81-bbb7-6eccd8b7f04b-plus.png"/>
                         </div>
+                      </div>
+                    </div>
+                    
+                    <div className="new-post-container">
+                    <h3 className="monkey-creation">Monkey Creation</h3>
+                      <div className="new-post-information-container">
+                          <div>
+                              <img className="new-post-img-preview" src={this.state.img}/>
+                          </div>
+                          <div className="new-post-file-drop">
+                            <input type='file' accept='image/png, image/jpeg, image/gif' onChange={(e) => {this.getSignedRequestPost(e.target.files)}}></input>
+                          </div>
+                          <textarea className="new-post-description" placeholder="About this monkey!"onChange={(e) => {this.setState({description: e.target.value})}}></textarea>
+                          <button className="new-post-submit" onClick={this.post}>Post</button>
+                      </div>
                     </div>
                     <div>{mappedPosts}</div>
                 </div>

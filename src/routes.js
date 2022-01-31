@@ -1,11 +1,11 @@
 import React from 'react';
 import {Switch, Route} from 'react-router-dom';
-import Dashboard from './Components/Dashboard'
-import Login from "./Components/Login";
-import Register from "./Components/Register";
-import Post from "./Components/Post";
-import Yourdex from "./Components/Yourdex"
-import Map from "./Components/Map"
+import Dashboard from './Components/Dashboard/Dashboard'
+import Login from "./Components/Login/Login";
+import Register from "./Components/Register/Register";
+import Post from "./Components/Post/Post";
+import Yourdex from "./Components/Yourdex/Yourdex"
+import Map from "./Components/Map/Map"
 
 export default (
         <Switch>
