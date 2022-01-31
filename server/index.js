@@ -10,6 +10,8 @@ const {SESSION_SECRET, SERVER_PORT, CONNECTION_STRING, S3_BUCKET, AWS_ACCESS_KEY
 
 const app = express()
 
+
+
 app.use(express.static(`${__dirname} + /../build`))
 app.use(express.json())
 
@@ -83,4 +85,5 @@ app.get('*', (req, res) => {
 })
 
 
-app.listen(SERVER_PORT, console.log(`You are on Port: ${SERVER_PORT} `))
+var port_number = server.listen(process.env.SERVER_PORT || 3000);
+app.listen(port_number, console.log(`You are on Port: ${port_number} `))
