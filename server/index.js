@@ -84,6 +84,4 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../build/index.html'))
 })
 
-
-var port_number = server.listen(process.env.PORT || 3000);
 app.listen(SERVER_PORT, console.log(`You are on Port: ${SERVER_PORT} `))
