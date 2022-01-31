@@ -86,4 +86,4 @@ app.get('*', (req, res) => {
 
 
 var port_number = server.listen(process.env.PORT || 3000);
-app.listen(port_number, console.log(`You are on Port: ${port_number} `))
+app.listen(SERVER_PORT, console.log(`You are on Port: ${SERVER_PORT} `))
