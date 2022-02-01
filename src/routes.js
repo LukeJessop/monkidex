@@ -9,9 +9,9 @@ import Map from "./Components/Map/Map"
 
 export default (
         <Switch>
-            <Route exact path='/' component={Dashboard}/>
+            <Route exact path='/' component={Login}/>
             <Route path='/register' component={Register}/>
-            <Route path='/dashboard' component={Login}/>
+            <Route path='/dashboard' component={Dashboard}/>
             <Route path='/map' component={Map}/>
             <Route path='/yourdex' component={Yourdex}/>
             <Route path='/post/:id' component={Post}/>
