@@ -13,8 +13,7 @@ const {SESSION_SECRET, SERVER_PORT, CONNECTION_STRING, S3_BUCKET, AWS_ACCESS_KEY
 const app = express()
 
 
-app.use(cors())
-app.use(express.static(__dirname, '..' , '/../build'))
+app.use(express.static(`${__dirname} + /../build`))
 app.use(express.json())
 
 app.use(session({
