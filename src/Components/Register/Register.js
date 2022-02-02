@@ -9,9 +9,11 @@ class Register extends Component {
         super()
         this.state = {
             username: '',
-            password: ''
+            password: '',
+            confirmPassword: ''
         }
         this.register = this.register.bind(this);
+        this.confirmPasswordFunction = this.confirmPasswordFunction.bind(this)
     }
 
     register(){
@@ -20,17 +22,29 @@ class Register extends Component {
         })
     }
 
+    confirmPasswordFunction(pass1, pass2, buttonClick){
+        if(pass1 === '' || pass2 === ''){
+            return 'confirm-password-input-empty'
+        }
+        if(pass1 === pass2){
+            if(buttonClick === true){
+                this.register()
+            }
+        }else{
+            return 'confirm-password-input-invalid'
+        }
+    }
+
     render(){
         return(
-            <div className="container postContainer">
-                <div className="loginBox">
+            <div className="registerbox-container">
+                <div className="registerbox">
                     <h1 className='title'>Register</h1>
-                    <input className='usernameInput' placeholder='username' onChange={(e) => this.setState({username: e.target.value})}></input>
-                    <input className='password' placeholder='password' type='password' onChange={(e) => this.setState({password: e.target.value})}></input>
-                    <br/>
-                    <button onClick={this.register}>Register</button>
-                    <br/>
-                    <Link to='/' className='loginLink'>Already have an account? Login here!</Link>
+                    <input className='username-input' placeholder='username' onChange={(e) => this.setState({username: e.target.value})}></input>
+                    <input className='password-input' placeholder='password' type='password' onChange={(e) => this.setState({password: e.target.value})}></input>
+                    <input className={`${this.confirmPasswordFunction(this.state.password, this.state.confirmPassword, false)}`} placeholder='Confirm Password' type='password' onChange={(e) => this.setState({confirmPassword: e.target.value})}></input>
+                    <button id='register-button' onClick={() => {this.confirmPasswordFunction(this.state.password, this.state.confirmPassword, true)}}>Register</button>
+                    <Link to='/' className='loginLink'><button>Already have an account? Login here!</button></Link>
                 </div>
             </div>
         )

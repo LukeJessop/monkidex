@@ -9,7 +9,8 @@ class Login extends Component {
         super()
         this.state = {
             username: '',
-            password: ''
+            password: '',
+            signInValid: true
         }
         this.login = this.login.bind(this);
     }
@@ -19,6 +20,11 @@ class Login extends Component {
             this.props.updateUser(res.data);
             this.props.history.push('/yourdex')
         })
+        .catch((err) => {
+            if(err){
+                this.setState({signInValid: false})
+            }
+            })
     }
 
     render(){
@@ -27,8 +33,9 @@ class Login extends Component {
                 <div className="loginBox">
                     <h2 className='title'>Login</h2>
                     <div className="login-inputs">
-                        <input className='username-input' placeholder='username' onChange={(e) => this.setState({username: e.target.value})}></input>
-                        <input className='password-input' placeholder='password' type='password' onChange={(e) => this.setState({password: e.target.value})}></input>
+                        {this.state.signInValid ? null : <div className="login-invalid">The Username/Password you've entered was incorrect</div>}
+                        <input className='username-input' placeholder='Username' onChange={(e) => this.setState({username: e.target.value})}></input>
+                        <input className='password-input' placeholder='Password' type='password' onChange={(e) => this.setState({password: e.target.value})}></input>
                         <button className="login-button" onClick={this.login}>Login</button>
                     </div>
                         <Link to='/register'><button className="registerLink">Dont have an account? Register here!</button></Link>
