@@ -9,23 +9,32 @@ class Post extends Component {
             description: '',
             img: '',
             author: '',
+            authorId: '',
             authorImg: '',
+            isUserAuthor: false,
+            postSettings: false,
+            editPostDropdown: false
         }
         this.deletePost = this.deletePost.bind(this)
         this.editPost = this.editPost.bind(this)
     }
 
     componentDidMount() {
-        axios.get(`/api/post/${this.props.match.params.id}`)
-          .then(res => {
-              const {description, img_link, username, profile_picture} = res.data
-            this.setState({
-                description: description,
-                img: img_link,
-                author: username,
-                authorImg: profile_picture
+        axios
+            .get(`/api/post/${this.props.match.params.id}`)
+            .then(res => {
+                const {description, img_link, username, profile_picture, author_id} = res.data
+                this.setState({
+                    description: description,
+                    img: img_link,
+                    author: username,
+                    authorId: author_id,
+                    authorImg: profile_picture
+                })
+                if(this.props.userId === this.state.authorId){
+                    this.setState({isUserAuthor: true})
+                }
             })
-        })
     }
     editPost(){
         axios.put(`/api/post/${this.props.match.params.id}`, this.state)
@@ -37,41 +46,38 @@ class Post extends Component {
     }
     render(){
         const {description, img, author} = this.state
-        if(this.props.username === author){
-            return(
-            <div className="container">
-                <div className="postContainer">
-                    <div className="imgContainerPost">
-                        <img className='idivImgPost' src={img}/>
-                    </div>
-
-                    <div>
-                        <img className='profilePicture' src={this.state.authorImg}/>
-                        <h1>{author}</h1>
-                    </div>
-
-                    <div className='postDescription'>{description}</div>
-                    
-                    <div className='settings'>
-                        <input className="editPost" type='checkbox'></input>
-                        <div className="editDropdown">
-                            <textarea className='editInput' value={this.state.description} onChange={(e) => this.setState({description: e.target.value})}></textarea>
-                            <button className='edit' onClick={this.editPost}>Submit</button>
-                        </div>
-                        <button className='delete' onClick={this.deletePost}>X</button>
-                    </div>              
-                </div>
-            </div>
-                
-            )
-        }
         return(
-            <div className="container">
+            <div className="parent-container">
                 <div className="individual-post-container">
                     <div className="info-container">
                         <div className="user-info-container">
                             <img className='profilePicture' src='https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'/>
                             <h3>{author}</h3>
+                            <img src="https://icon-library.com/images/white-settings-icon/white-settings-icon-0.jpg" className="post-settings" onClick={() => this.state.postSettings ? this.setState({postSettings: false}) : this.setState({postSettings: true})}/>
+                            {
+                            this.state.isUserAuthor && this.state.postSettings
+                            ? 
+                            <div className='settings'>
+                                <div className='dropdown-container'>
+                                    <div className="button-list">
+                                        <button className='edit-post-toggle' onClick={() => this.state.editPostDropdown ? this.setState({editPostDropdown: false}) : this.setState({editPostDropdown: true})}>Edit Post</button>
+                                        <button className='delete-post' onClick={this.deletePost}>Delete Post</button>
+                                    </div>
+                                    {
+                                    this.state.editPostDropdown ? 
+                                    <div className="edit-post-dropdown">
+                                        <textarea className='edit-post-textarea' value={this.state.description} onChange={(e) => this.setState({description: e.target.value})}></textarea>
+                                        <button className='submit-edit-post' onClick={this.editPost}>Submit</button>
+                                    </div>
+                                    :
+                                    null
+                                    }
+
+                                </div>
+                            </div> 
+                            : 
+                            null
+                            }
                         </div>
                         {description}
                     </div>

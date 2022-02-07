@@ -1,6 +1,6 @@
 .App {
   background-color: #115400;
   background-image: url('./pattern_herringbone-7_2_2_0-0_0_1__105200_00000059.png');
-  min-height: 614px;
+  min-height: 100vh;
   min-width: 375px;
 }

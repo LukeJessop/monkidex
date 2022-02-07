@@ -1,3 +1,11 @@
+.parent-container{
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    width: 75%;
+    background-color: #683200;
+}
+
 .individual-post-container{
     color: white;
     display: flex;
@@ -15,6 +23,18 @@
 
 .user-info-container{
     display: flex;
+    position: relative;
+}
+.post-settings{
+    position: absolute;
+    top: 20px;
+    right: 0;
+    width: 20px;
+    height: 20px;
+}
+
+.post-settings:hover{
+    cursor: pointer;
 }
 
 
@@ -25,4 +45,61 @@
 
 .post-img{
     width: 800px;
+}
+
+
+.settings{
+    position: absolute;
+    right: 30px;
+    top: 30px;
+}
+
+.dropdown-container{
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+    align-items: center;
+    background-color:#4b2400;
+    padding-left: 5px;
+}
+
+.button-list{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+
+    padding: 5px;
+
+}
+
+.edit-post-toggle{
+    border: none;
+    margin-bottom: 5px;
+    font-size: 15px;
+}
+.delete-post{
+    border: none;
+    background-color: rgb(255, 36, 36);
+    color: white;
+    font-size: 15px;
+}
+
+
+
+.edit-post-dropdown{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+}
+
+.edit-post-textarea{
+    resize: none;
+    border: none;
+    margin-right: 10px;
+    width: 350px;
+}
+.submit-edit-post{
+    border: none;
+    margin-right: 5px;
+    font-size: 15px;
 }

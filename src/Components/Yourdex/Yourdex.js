@@ -8,10 +8,9 @@ class Yourdex extends Component {
     constructor(props){
         super(props)
         this.state = {
-            editProfile: false,
-            newPost: true,
+            newPost: false,
             isUploading: false,
-            editPfp: true,
+            editPfp: false,
             yourPosts: [],
             description: '',
             img: '',
@@ -38,7 +37,7 @@ class Yourdex extends Component {
 
     getYourPosts(){
         Axios.get('/api/yourposts').then(res => {
-            this.setState({yourPosts: res.data})
+            this.setState({yourPosts: res.data.reverse()})
 
         })
     }
@@ -216,12 +215,12 @@ class Yourdex extends Component {
                   <div className="informationContainer">
                       <div className="items">
                           <div className="imgContainer">
-                              <img className="imgPost" src={element.img_link}/>
+                              <img alt='post' className="imgPost" src={element.img_link}/>
                           </div>
                       </div>
                       <div className="profileContainer">
                           <div className="userInfo">
-                              <img className='profilePicture' src={element.profile_picture}/>
+                              <img alt='' className='profilePicture' src={element.profile_picture}/>
                               <h3>{element.username}</h3>
                           </div>
                           <div className="descriptionContainer">
@@ -234,40 +233,69 @@ class Yourdex extends Component {
             )
         })
         return(
-            <div>
+            <div className="topContainer">
+                {
+                  this.state.editPfp ?
+                  <div className="pfpEditContainer">
+                    <div className="pfpEdit">
+                        <h5 className="titles">Profile Picture</h5>
+                      <div className="profilePictureContainer">
+                        <img className="pfpPreview" src={this.state.pfp}/>
+                        <input type='file' accept='image/png, image/jpeg, image/gif' onChange={(e) => {this.getSignedRequestPfp(e.target.files)}}></input>
+                      </div>
+                        <h5 className="titles">Profile Banner</h5>
+                      <div className="profileBannerContainer">
+                        <img className="bannerPreview" src={this.state.banner}/>
+                        <input type='file' accept='image/png, image/jpeg, image/gif' onChange={(e) => {this.getSignedRequestBanner(e.target.files)}}></input>
+                      </div>
+                      <div className="finalizationButtonContainer">
+                        <button id="validationButtons" onClick={() => this.editPfp()}>save</button>
+                        <button id="validationButtons" onClick={() => this.setState({editPfp: false})}>cancel</button>
+                      </div>
+                    </div>
+                  </div>
+                  :
+                  null
+                  /*TO EDIT PROFILE PICTURES ^^*/
+                }
                 <div className="container">
                     <div className="profilecontainer">
                       <div className="bannerContainer">
-                        <img className='banner' src={this.state.banner}/>
+                        <div className="editPfpButton" onClick={() => !this.state.editPfp ? this.setState({editPfp: true}) : this.setState({editPfp: false})}></div>
+                        <img alt='' className='banner' src={this.state.banner}/>
                       </div>
                       <div className="profileInfoContainer">
-                        <img className='profile'src={this.state.pfp}/>
+                        <img alt='' className='profile' src={this.state.pfp}/>
                         <h3 className='username'>{this.props.username}</h3>
                       </div>
                       <div className="profile-buttons">
-                        <button className="editPfpButton">Edit Pictures</button>
                         <div className="create" onClick={() => {
-                          if(this.state.newPost === true){this.setState({newPost: false})}else{this.setState({newPost: true})}
+                          !this.state.newPost ? this.setState({newPost: true}) : this.setState({newPost: false})
                         }}>
-                          <img className="create-post-button" src="https://monkidex-bucket.s3.amazonaws.com/490a7ddc-b302-4f81-bbb7-6eccd8b7f04b-plus.png"/>
+                          <img alt='' className="create-post-button" src="https://monkidex-bucket.s3.amazonaws.com/490a7ddc-b302-4f81-bbb7-6eccd8b7f04b-plus.png"/>
                         </div>
                       </div>
                     </div>
                     
-                    <div className="new-post-container">
-                    <h3 className="monkey-creation">Monkey Creation</h3>
-                      <div className="new-post-information-container">
-                          <div>
-                              <img className="new-post-img-preview" src={this.state.img}/>
-                          </div>
-                          <div className="new-post-file-drop">
-                            <input type='file' accept='image/png, image/jpeg, image/gif' onChange={(e) => {this.getSignedRequestPost(e.target.files)}}></input>
-                          </div>
-                          <textarea className="new-post-description" placeholder="About this monkey!"onChange={(e) => {this.setState({description: e.target.value})}}></textarea>
-                          <button className="new-post-submit" onClick={this.post}>Post</button>
+                    {this.state.newPost ? 
+                      <div className="new-post-container">
+                        <div className="new-post-information-container">
+                            <div>
+                                <img alt='' className="new-post-img-preview" src={this.state.img}/>
+                            </div>
+                            <div className="new-post-file-drop-and-description">
+                            <textarea className="new-post-description" placeholder="About this monkey!"onChange={(e) => {this.setState({description: e.target.value})}}></textarea>
+                              <input type='file' accept='image/png, image/jpeg, image/gif' onChange={(e) => {this.getSignedRequestPost(e.target.files)}}></input>
+                            </div>
+                            <button className="new-post-submit" onClick={this.post}>Post</button>
+                        </div>
                       </div>
-                    </div>
-                    <div>{mappedPosts}</div>
+                      : 
+                      null 
+                    /*TO POP OPEN THE NEW POST WINDOW ^^^^ also need to style this stuff*/}
+                    
+
+                    <div>{mappedPosts === [] ? 'No posts here!' : mappedPosts}</div>
                 </div>
 
             </div>

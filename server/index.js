@@ -76,7 +76,7 @@ app.get('/api/post', ctrl.getPosts) //for all posts :)
 app.get('/api/yourposts', ctrl.getUserPosts) //for all user posts :)
 app.get('/api/post/:id', ctrl.getIndivPosts) //for individual posts :)
 app.put('/api/post/:id', ctrl.editPost) //edits post :)
-app.put('/api/pfp', ctrl.editPfp)
+app.put('/api/pfp', ctrl.editPfp) //edits profile photos
 app.delete('/api/post/:id', ctrl.deletePost) //deletes post :)
 //
 
