@@ -45,13 +45,19 @@ class Post extends Component {
         .then(() => this.props.history.push('/yourdex'))
     }
     render(){
-        const {description, img, author} = this.state
+        const {description, img, author, authorImg} = this.state
         return(
             <div className="parent-container">
                 <div className="individual-post-container">
                     <div className="info-container">
                         <div className="user-info-container">
+                            {
+                            authorImg 
+                            ?
+                            <img className='profilePicture' src={authorImg}/>
+                            :
                             <img className='profilePicture' src='https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'/>
+                            }
                             <h3>{author}</h3>
                             <img src="https://icon-library.com/images/white-settings-icon/white-settings-icon-0.jpg" className="post-settings" onClick={() => this.state.postSettings ? this.setState({postSettings: false}) : this.setState({postSettings: true})}/>
                             {

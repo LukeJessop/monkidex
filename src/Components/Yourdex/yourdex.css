@@ -4,14 +4,10 @@
   justify-content: center;
   align-items: stretch;
 }
-
 .container{
   width:75%;
-  background-color: #683200;
-
+  background-color: #333333;
 }
-
-
 .create-post-button{
   height: 20px;
 }
@@ -29,26 +25,12 @@
   top: 170px;
   right: 40px;
 }
-
-.descriptionbox{
-  height: 78px;
-  width: 850px;
-  resize: none;
-  
-  border: 2px solid rgb(0, 59, 0);
-  border-radius: 10px;
-  background-color: rgb(255, 255, 255);
-  color: white;
-  font-family: 'Helvetica', sans-serif ;
-  font-size: 16px;
-}
 .profilecontainer{
   height: 300px;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid #c7b300;
 }
 .bannerContainer{
   background-color: rgb(255, 255, 255);
-  border-bottom: 2px solid black;
   display: flex;
   justify-content: center;
   width: 100%;
@@ -72,10 +54,9 @@
   width: 116px;
   height: 116px;
   object-fit: cover;
-  background-color: white;
   border-radius: 50%;
   margin-right: 25px;
-  border: 2px solid black;
+  border: 1px solid #c7b300;
 }
 .username{
   color: white;

@@ -26,7 +26,6 @@ class Dashboard extends Component {
         let mappedPosts = this.state.allPosts.map((element) => {
             return(
                 <div className="post-container">
-
                 <Link to={`/post/${element.post_id}`} key={element.post_id}>
                     <div className="post">
                         <div className="informationContainer">
@@ -47,7 +46,7 @@ class Dashboard extends Component {
                             <div className="description">{element.description}</div>
                         </div>
                         <div className="interaction-buttons-container">
-                            <button className="like-button">Like Button</button>
+                            <button className="like-button"><img src="https://static.vecteezy.com/system/resources/thumbnails/000/423/558/small/Multimedia__287_29.jpg"/></button>
                             <button className="comment-button">Comment Button</button>
                             <div>
                                 <Comments/>
