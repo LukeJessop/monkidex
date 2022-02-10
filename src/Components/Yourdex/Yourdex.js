@@ -211,23 +211,10 @@ class Yourdex extends Component {
         let mappedPosts = this.state.yourPosts.map((element) => {
             return(
               <Link to={`/post/${element.post_id}`} key={element.post_id}>
-              <div className="post">
-                  <div className="informationContainer">
-                      <div className="items">
-                          <div className="imgContainer">
-                              <img alt='post' className="imgPost" src={element.img_link}/>
-                          </div>
-                      </div>
-                      <div className="profileContainer">
-                          <div className="userInfo">
-                              <img alt='' className='profilePicture' src={element.profile_picture}/>
-                              <h3>{element.username}</h3>
-                          </div>
-                          <div className="descriptionContainer">
-                              <div className="description">{element.description}</div>
-                          </div>
-                      </div>
-                  </div>
+              <div className="user-posts">
+                <div className="post-img-container">
+                    <img alt='post' className="img" src={element.img_link}/>
+                </div>
               </div>
           </Link>
             )
@@ -295,7 +282,7 @@ class Yourdex extends Component {
                     /*TO POP OPEN THE NEW POST WINDOW ^^^^ also need to style this stuff*/}
                     
 
-                    <div>{mappedPosts === [] ? 'No posts here!' : mappedPosts}</div>
+                    <div className="mapped-posts-container">{mappedPosts.length === 0 ? 'No posts here!' : mappedPosts}</div>
                 </div>
 
             </div>

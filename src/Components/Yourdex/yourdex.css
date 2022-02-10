@@ -265,3 +265,31 @@
   height: 30px;
   width: 80px;
 }
+
+
+
+.mapped-posts-container{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  margin-top: 10px;
+}
+
+.user-posts{
+  display: flex;
+}
+
+.post-img-container{
+  
+}
+
+.img{
+  object-fit: cover;
+  width: 235px;
+  height: 235px;
+  margin-left: 2.5px;
+}
+
+.img:hover{
+  filter: contrast(80%);
+}
