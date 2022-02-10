@@ -282,7 +282,7 @@ class Yourdex extends Component {
                     /*TO POP OPEN THE NEW POST WINDOW ^^^^ also need to style this stuff*/}
                     
 
-                    <div className="mapped-posts-container">{mappedPosts.length === 0 ? 'No posts here!' : mappedPosts}</div>
+                    <div className="mapped-posts-container">{mappedPosts.length === 0 ? <div className="no-posts">You have not posted anything, press the plus sign to create a post.</div> : mappedPosts}</div>
                 </div>
 
             </div>

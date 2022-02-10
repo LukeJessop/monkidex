@@ -46,8 +46,8 @@ class Dashboard extends Component {
                             <div className="description">{element.description}</div>
                         </div>
                         <div className="interaction-buttons-container">
-                            <button className="like-button"><img src="https://static.vecteezy.com/system/resources/thumbnails/000/423/558/small/Multimedia__287_29.jpg"/></button>
-                            <button className="comment-button">Comment Button</button>
+                            <button className="like-button"></button>
+                            <button className="comment-button"></button>
                             <div>
                                 <Comments/>
                             </div>
@@ -58,7 +58,7 @@ class Dashboard extends Component {
         })
         return(
             <div className="container dashboardContainer">
-                {mappedPosts}
+                {mappedPosts.length === 0 ? <img className="loading-banana" src="https://monkidex-bucket.s3.amazonaws.com/e0ac908e-83db-4e58-9e4b-24340037a6ef-banana-96.gif"/> : mappedPosts }
             </div>
         )
     }

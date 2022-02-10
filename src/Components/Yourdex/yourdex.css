@@ -254,8 +254,17 @@
   flex-wrap: wrap;
   justify-content: flex-start;
   margin-top: 10px;
+  min-height: 40.6vh;
 }
 
+.no-posts{
+  display: flex;
+  min-height: 40.6vh;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
 .user-posts{
   display: flex;
 }

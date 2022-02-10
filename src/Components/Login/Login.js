@@ -17,6 +17,10 @@ class Login extends Component {
 
     login(){
         Axios.post('/auth/login', this.state).then(res => {
+            if(this.state.username === '' || this.state.password === ''){
+                this.setState({signInValid: false})
+                return
+            }
             this.props.updateUser(res.data);
             this.props.history.push('/yourdex')
         })
