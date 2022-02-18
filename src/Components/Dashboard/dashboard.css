@@ -1,9 +1,9 @@
 .dashboardContainer{
-    height: auto;
-    min-width: 889px;
-    min-height: 847px;
-    width: 65%;
-    margin: 0 auto;
+  width: 65%;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
 }
 .post-container{
   display: flex;
@@ -41,12 +41,12 @@
     
 }
 
-.imgPost {
+.img {
     object-fit: contain;
-    max-width:600px;
-    min-width:600px;
-    max-height:400px;
-    min-height:300px;
+    width:312px;
+    height:312px;
+    min-width:312px;
+    min-height:312px;
 }
 
 .profileContainer{
@@ -55,9 +55,25 @@
     flex-direction: column;
 }
 
-.userInfo{
-    display: flex;
-    margin: 10px;
+.user-posts{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 1px;
+}
+.user-info{
+  display: flex;
+  margin: 5px;
+  align-items: center;
+}
+.profile-picture{
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+.username{
+
 }
 
 .interaction-buttons-container{
