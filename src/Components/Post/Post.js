@@ -93,7 +93,7 @@ class Post extends Component {
                         <div className="img-container">
                         <img className="post-img" src={img}/>
                         </div>
-                    <Comments postId={this.props.match.params.id}/>
+                    <Comments postId={this.props.match.params.id} isUserAuthor={this.state.isUserAuthor}/>
                     </div>
                 </div>
             </div>

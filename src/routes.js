@@ -12,7 +12,6 @@ export default (
             <Route exact path='/' component={Login}/>
             <Route path='/register' component={Register}/>
             <Route path='/dashboard' component={Dashboard}/>
-            <Route path='/map' component={Map}/>
             <Route path='/yourdex' component={Yourdex}/>
             <Route path='/post/:id' component={Post}/>
         </Switch>

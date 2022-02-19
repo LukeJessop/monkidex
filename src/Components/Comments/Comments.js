@@ -19,7 +19,7 @@ class Comments extends Component {
         .then((res) => {
             console.log(res)
             this.setState({
-                commentArray: res.data
+                commentArray: res.data.reverse()
             })
         })
     }
@@ -41,12 +41,19 @@ class Comments extends Component {
     render(){
         const comments = this.state.commentArray.map((element) => {
             return(
-                <div className='comment-container'>
-                    <div className='comment-author-info'>
-                        <img className='comment-author-pfp'  src={element.profile_picture}/>
-                        <div className='comment-author'>{element.username}</div>
+                <div className='comment-container' key={element.comment_id}>
+                    <div>
+                        <div className='comment-author-info'>
+                            <img className='comment-author-pfp'  src={element.profile_picture}/>
+                            <div className='comment-author'>{element.username}</div>
+                        </div>
+                        <div className='comment-body'>{element.body}</div>
                     </div>
-                    <div className='comment-body'>{element.body}</div>
+                    {
+                        element.author_id === this.props.userId ? <button>delete</button>
+                        : this.props.isUserAuthor ? <button>delete</button>
+                        : null
+                    }
                 </div>
             )
         })
