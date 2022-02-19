@@ -24,7 +24,6 @@ class Dashboard extends Component {
 
     render(){
         let mappedPosts = this.state.allPosts.map((element) => {
-            console.log(element)
             return(
                 <div className="post-container">
                     <Link to={`/post/${element.post_id}`} key={element.post_id}>

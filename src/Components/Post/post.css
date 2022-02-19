@@ -12,6 +12,13 @@
     flex-direction: column;
 }
 
+.individual-post-wrapper{
+    display: flex;
+    flex-direction: row;
+    background-color: #525252;
+    padding: 10px;
+}
+
 .info-container{
     width: 800px;
     margin: auto;
@@ -43,11 +50,10 @@
 }
 
 .post-img{
-    object-fit: contain;
-    max-width: 800px;
-    min-width: 700px;
-    max-height: 400px;
-    min-height: 300px;
+    margin-right: 10px;
+    object-fit: cover;
+    width: 450px;
+    height: 461px;
 }
 
 

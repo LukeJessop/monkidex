@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt')
 
 module.exports = {
+    //user related modules
     register: async (req, res) => {
         const db = req.app.get('db')
         const {username, password} = req.body
@@ -50,11 +51,12 @@ module.exports = {
         const {banner, pfp} = req.body
         db.users.edit_pfp(userId, pfp, banner).then((pfp) => res.status(200).send(pfp))
     },
+
+    //post related modules
     newPost: async (req, res) => {
         const db = req.app.get('db')
         const {description, img} = req.body
         const userId = req.session.user.userId
-        console.log(userId, description, img)
         await db.posts.add_post([description, img, userId])
         res.sendStatus(200)
     },
@@ -72,7 +74,6 @@ module.exports = {
             const db = req.app.get('db')
             const {id} = req.params
             const [post] = await db.posts.get_one_post(+id)
-            console.log(post)
             res.status(200).send(post)
         }
         catch(err){
@@ -88,8 +89,35 @@ module.exports = {
     deletePost: (req, res) => {
         const db = req.app.get('db')
         const {id} = req.params
-        console.log(id)
         db.posts.delete_post(+id)
         res.sendStatus(200)
-    }
+    },
+
+    //comments related modules
+    newComment: async (req, res) => {
+        const db = req.app.get('db')
+        const {newCommentBody, postId, userId} = req.body
+        try{
+            await db.comments.create_comment(newCommentBody, postId, userId)
+            res.sendStatus(200)
+        }catch(err){
+            console.log(err)
+        }
+    },
+    getComments: async (req, res) => {
+        const db = req.app.get('db')
+        const {id} = req.params
+        try{
+            const comments = await db.comments.get_comments(id)
+            res.status(200).send(comments)
+
+        }
+        catch(err){
+            console.log(err)
+        }
+    },
+    editComment: async (req, res) => {
+    },
+    deleteComment: async (req, res) => {
+    },
 }

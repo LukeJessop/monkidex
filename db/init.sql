@@ -18,5 +18,6 @@ CREATE TABLE comments {
     body TEXT NOT NULL,
     destination_id INT REFERENCES posts(post_id),
     author_id INT REFERENCES users (user_id),
+    author_username varchar(999999),
     likes INT 
 }

@@ -79,6 +79,8 @@ app.put('/api/post/:id', ctrl.editPost) //edits post :)
 app.put('/api/pfp', ctrl.editPfp) //edits profile photos
 app.delete('/api/post/:id', ctrl.deletePost) //deletes post :)
 //
+app.get('/api/comment/:id', ctrl.getComments)//get all comments on a post
+app.post('/api/comment', ctrl.newComment)//create new comment
 
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../build/index.html'))

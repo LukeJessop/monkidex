@@ -1,6 +1,7 @@
 import { Component } from "react";
 import axios from 'axios'
 import {connect} from 'react-redux'
+import Comments from '../Comments/Comments'
 import './post.css'
 class Post extends Component {
     constructor(props){
@@ -49,7 +50,8 @@ class Post extends Component {
         return(
             <div className="parent-container">
                 <div className="individual-post-container">
-                    <div className="info-container">
+                    
+                        <div className="info-container">
                         <div className="user-info-container">
                             {
                             authorImg 
@@ -86,12 +88,13 @@ class Post extends Component {
                             }
                         </div>
                         {description}
-                    </div>
-
-                    <div className="img-container">
+                        </div>
+                    <div className="individual-post-wrapper">
+                        <div className="img-container">
                         <img className="post-img" src={img}/>
+                        </div>
+                    <Comments postId={this.props.match.params.id}/>
                     </div>
-                    <div>THIS IS WEHRE THE COMMENTS ARE GOING TO GO!</div>
                 </div>
             </div>
         )
