@@ -81,6 +81,7 @@ app.delete('/api/post/:id', ctrl.deletePost) //deletes post :)
 //
 app.get('/api/comment/:id', ctrl.getComments)//get all comments on a post
 app.post('/api/comment', ctrl.newComment)//create new comment
+app.delete('/api/comment/:id', ctrl.deleteComment)//deletes a comment
 
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../build/index.html'))

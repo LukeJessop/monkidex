@@ -119,5 +119,9 @@ module.exports = {
     editComment: async (req, res) => {
     },
     deleteComment: async (req, res) => {
+        const db= req.app.get('db')
+        const {id} = req.params
+        db.comments.delete_comment(id)
+        res.sendStatus(200)
     },
 }

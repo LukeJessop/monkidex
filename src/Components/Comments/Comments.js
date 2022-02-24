@@ -10,9 +10,13 @@ class Comments extends Component {
             newCommentBody: ''
         }
         this.postComment = this.postComment.bind(this)
+        this.getComments = this.getComments.bind(this)
     }
 
     componentDidMount(){
+        this.getComments()
+    }
+    getComments(){
         let {postId} = this.props
         axios
         .get(`/api/comment/${postId}`)
@@ -23,7 +27,6 @@ class Comments extends Component {
             })
         })
     }
-
     postComment(){
         let {newCommentBody} = this.state
         let {postId, userId} = this.props
@@ -32,11 +35,17 @@ class Comments extends Component {
         .post('/api/comment', {newCommentBody, postId, userId})
         .then((res) => {
             console.log(res)
-            window.location.reload()
+            this.getComments()
         })
     }
-
-
+    
+    deleteComment(commentId){
+        axios
+        .delete(`/api/comment/${commentId}`)
+        .then((res) => {
+            this.getComments()
+        })
+    }
 
     render(){
         const comments = this.state.commentArray.map((element) => {
@@ -50,8 +59,8 @@ class Comments extends Component {
                         <div className='comment-body'>{element.body}</div>
                     </div>
                     {
-                        element.author_id === this.props.userId ? <button>delete</button>
-                        : this.props.isUserAuthor ? <button>delete</button>
+                        element.author_id === this.props.userId ? <button onClick={() => {this.deleteComment(element.comment_id)}}>delete</button>
+                        : this.props.isUserAuthor ? <button onClick={() => {this.deleteComment(element.comment_id)}}>delete</button>
                         : null
                     }
                 </div>
