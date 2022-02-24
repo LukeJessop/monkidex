@@ -21,7 +21,6 @@ class Comments extends Component {
         axios
         .get(`/api/comment/${postId}`)
         .then((res) => {
-            console.log(res)
             this.setState({
                 commentArray: res.data.reverse()
             })
@@ -30,11 +29,9 @@ class Comments extends Component {
     postComment(){
         let {newCommentBody} = this.state
         let {postId, userId} = this.props
-        console.log('create comment ran!')
         axios
         .post('/api/comment', {newCommentBody, postId, userId})
         .then((res) => {
-            console.log(res)
             this.getComments()
         })
     }
@@ -53,7 +50,7 @@ class Comments extends Component {
                 <div className='comment-container' key={element.comment_id}>
                     <div>
                         <div className='comment-author-info'>
-                            <img className='comment-author-pfp'  src={element.profile_picture}/>
+                            <img alt='comment author pfp' className='comment-author-pfp'  src={element.profile_picture}/>
                             <div className='comment-author'>{element.username}</div>
                         </div>
                         <div className='comment-body'>{element.body}</div>

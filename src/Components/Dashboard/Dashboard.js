@@ -2,7 +2,6 @@ import Axios from "axios";
 import { Component } from "react";
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
-import Comments from './../Comments/Comments'
 import './dashboard.css'
 class Dashboard extends Component {
     constructor(){
@@ -29,7 +28,7 @@ class Dashboard extends Component {
                     <Link to={`/post/${element.post_id}`} key={element.post_id}>
                         <div className="user-posts">
                             <div className="user-info">
-                                <img className="profile-picture" src={element.profile_picture}/>
+                                <img alt="profile picture" className="profile-picture" src={element.profile_picture}/>
                                 <div className="username">{element.username}</div>
                             </div>
                             <div className="post-img-container">
@@ -42,7 +41,7 @@ class Dashboard extends Component {
         })
         return(
             <div className="container dashboardContainer">
-                {mappedPosts.length === 0 ? <img className="loading-banana" src="https://monkidex-bucket.s3.amazonaws.com/e0ac908e-83db-4e58-9e4b-24340037a6ef-banana-96.gif"/> : mappedPosts }
+                {mappedPosts.length === 0 ? <img alt="loading banana gif" className="loading-banana" src="https://monkidex-bucket.s3.amazonaws.com/e0ac908e-83db-4e58-9e4b-24340037a6ef-banana-96.gif"/> : mappedPosts }
             </div>
         )
     }

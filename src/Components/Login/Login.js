@@ -1,6 +1,6 @@
 import Axios from "axios";
 import { Component } from "react";
-import {Link, withRouter} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import {connect} from 'react-redux'
 import {updateUser} from './../../redux/reducer'
 import './login.css'

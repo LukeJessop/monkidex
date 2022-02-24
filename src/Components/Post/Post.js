@@ -56,12 +56,12 @@ class Post extends Component {
                             {
                             authorImg 
                             ?
-                            <img className='profilePicture' src={authorImg}/>
+                            <img alt="author pfp" className='profilePicture' src={authorImg}/>
                             :
-                            <img className='profilePicture' src='https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'/>
+                            <img alt="author no pfp" className='profilePicture' src='https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'/>
                             }
                             <h3>{author}</h3>
-                            <img src="https://icon-library.com/images/white-settings-icon/white-settings-icon-0.jpg" className="post-settings" onClick={() => this.state.postSettings ? this.setState({postSettings: false}) : this.setState({postSettings: true})}/>
+                            <img alt="settings cog" src="https://icon-library.com/images/white-settings-icon/white-settings-icon-0.jpg" className="post-settings" onClick={() => this.state.postSettings ? this.setState({postSettings: false}) : this.setState({postSettings: true})}/>
                             {
                             this.state.isUserAuthor && this.state.postSettings
                             ? 
@@ -91,7 +91,7 @@ class Post extends Component {
                         </div>
                     <div className="individual-post-wrapper">
                         <div className="img-container">
-                        <img className="post-img" src={img}/>
+                        <img alt="post img" className="post-img" src={img}/>
                         </div>
                     <Comments postId={this.props.match.params.id} isUserAuthor={this.state.isUserAuthor}/>
                     </div>
