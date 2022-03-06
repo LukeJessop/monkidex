@@ -13,7 +13,10 @@ const {SESSION_SECRET, SERVER_PORT, CONNECTION_STRING, S3_BUCKET, AWS_ACCESS_KEY
 const app = express()
 
 
-app.use(express.static(`${__dirname} + /../build`))
+app.get('/',function(req,res) {
+  res.sendFile(path.join(__dirname, '../src/App.js'));
+});
+
 app.use(express.json())
 
 app.use(session({
@@ -24,7 +27,7 @@ app.use(session({
 }))
 
 massive({
-    connectionString: CONNECTION_STRING,
+    connectionString: process.env.DATABASE_URL,
     ssl:{
         rejectUnauthorized: false
     }
@@ -83,8 +86,10 @@ app.get('/api/comment/:id', ctrl.getComments)//get all comments on a post
 app.post('/api/comment', ctrl.newComment)//create new comment
 app.delete('/api/comment/:id', ctrl.deleteComment)//deletes a comment
 
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../build/index.html'))
-})
+// app.get('*', (req, res) => {
+//   res.sendFile(path.join(__dirname, '../build/index.html'))
+// })
 
-app.listen(SERVER_PORT, console.log(`You are on Port: ${SERVER_PORT} `))
+const port = process.env.PORT || SERVER_PORT
+
+app.listen(port, console.log(`You are on Port: ${port} `))
