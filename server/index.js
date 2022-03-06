@@ -27,7 +27,7 @@ app.use(session({
 }))
 
 massive({
-    connectionString: process.env.DATABASE_URL,
+    connectionString: process.env.DATABASE_URL || CONNECTION_STRING,
     ssl:{
         rejectUnauthorized: false
     }
