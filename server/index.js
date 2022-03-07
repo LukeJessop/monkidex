@@ -14,7 +14,7 @@ const app = express()
 
 
 app.get('/',function(req,res) {
-  res.sendFile(path.join(__dirname, '../build'));
+  res.sendFile(path.join(__dirname, '../../build'));
 });
 
 app.use(express.json())
