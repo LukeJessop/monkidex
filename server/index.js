@@ -2,7 +2,7 @@ require ('dotenv').config();
 const aws = require('aws-sdk')
 const express = require('express')
 const massive = require('massive')
-const session = require('express-session')
+const session = require('cookie-session')
 const ctrl = require('./controller')
 const path = require('path')
 const cors = require('cors')
