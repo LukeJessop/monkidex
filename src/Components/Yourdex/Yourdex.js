@@ -252,7 +252,7 @@ class Yourdex extends Component {
                         <img alt='' className='banner' src={this.state.banner}/>
                       </div>
                       <div className="profileInfoContainer">
-                        <img alt='' className='profile' src={this.state.pfp}/>
+                        <img alt='' className='profile' src={this.state.pfp || 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'}/>
                         <h3 className='username'>{this.props.username}</h3>
                       </div>
                       <div className="profile-buttons">
