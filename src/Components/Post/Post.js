@@ -67,10 +67,17 @@ class Post extends Component {
                             ? 
                             <div className='settings'>
                                 <div className='dropdown-container'>
-                                    <div className="button-list">
-                                        <button className='edit-post-toggle' onClick={() => this.state.editPostDropdown ? this.setState({editPostDropdown: false}) : this.setState({editPostDropdown: true})}>Edit Post</button>
-                                        <button className='delete-post' onClick={this.deletePost}>Delete Post</button>
-                                    </div>
+                                    {
+                                    this.state.isUserAuthor ?
+                                        <div className="button-list">
+                                            <button className='edit-post-toggle' onClick={() => this.state.editPostDropdown ? this.setState({editPostDropdown: false}) : this.setState({editPostDropdown: true})}>Edit Post</button>
+                                            <button className='delete-post' onClick={this.deletePost}>Delete Post</button>
+                                        </div>
+                                    :
+                                        null
+                                    }
+
+
                                     {
                                     this.state.editPostDropdown ? 
                                     <div className="edit-post-dropdown">
