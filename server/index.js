@@ -5,7 +5,6 @@ const massive = require('massive')
 const session = require('express-session')
 const ctrl = require('./controller')
 const path = require('path')
-const cors = require('cors')
 
 
 const {SESSION_SECRET, SERVER_PORT, DATABASE_URL, S3_BUCKET, AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY} = process.env;
