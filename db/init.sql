@@ -1,4 +1,4 @@
-CREATE TABLE users (
+CREATE TABLE monkeys (
     user_id SERIAL PRIMARY KEY,
     username TEXT NOT NULL,
     password TEXT NOT NULL,
@@ -6,14 +6,14 @@ CREATE TABLE users (
     profile_banner TEXT NOT NULL
 );
 
-CREATE TABLE posts (
+CREATE TABLE creations (
     post_id SERIAL PRIMARY KEY,
     description TEXT NOT NULL,
     img_link TEXT NOT NULL,
     author_id INT REFERENCES users (user_id),
     likes INT
 )
-CREATE TABLE comments {
+CREATE TABLE monkey_comments {
     comment_id SERIAL PRIMARY KEY,
     body TEXT NOT NULL,
     destination_id INT REFERENCES posts(post_id),

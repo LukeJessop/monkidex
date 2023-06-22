@@ -1,3 +1,3 @@
-INSERT INTO users (username, password)
+INSERT INTO monkeys (username, password)
 VALUES ($1, $2)
 RETURNING *;
